@@ -12,14 +12,14 @@ import {
   useNavigation,
   useSubmit,
 } from "react-router-dom";
-import { getContacts, createContact } from "../contacts";
+import { getYums, createYum } from "../yums";
 import { useEffect, useState } from "react";
 
 // action
 export async function action() {
-  const contact = await createContact();
-  return redirect(`/contacts/${contact.id}/edit`);
-  // return { contact };
+  const yum = await createYum();
+  return redirect(`/yums/${yum.id}/edit`);
+  // return { yum };
 }
 
 // loader
@@ -27,13 +27,13 @@ export async function action() {
 export async function loader({ request }) {
 const url = new URL(request.url);
 const q = url.searchParams.get("q") || "";
-const contacts = await getContacts(q);
-return { contacts, q };
+const yums = await getYums(q);
+return { yums, q };
 }
 
 export default function Home() {
-  // loads all contacts, as well as the search query
-  const { contacts, q } = useLoaderData();
+  // loads all yums, as well as the search query
+  const { yums, q } = useLoaderData();
   const [query, setQuery] = useState(q);
   const navigation = useNavigation();
   const submit = useSubmit();
@@ -98,13 +98,13 @@ export default function Home() {
 
 
 
-        <h1>React Router Contacts</h1>
+        <h1>ooga booga</h1>
         <div>
           <Form id="search-form" role="search">
             <input
               id="q"
               className={searching ? "loading" : ""}
-              aria-label="Search contacts"
+              aria-label="Search yums"
               placeholder="Search"
               type="search"
               name="q"
@@ -133,12 +133,12 @@ export default function Home() {
         </div>
         <nav>
           {/* access + render data */}
-          {contacts.length ? (
+          {yums.length ? (
               <ul>
-              {contacts.map((contact) => (
-                  <li key={contact.id}>
+              {yums.map((yum) => (
+                  <li key={yum.id}>
                       <NavLink
-                  to={`contacts/${contact.id}`}
+                  to={`yums/${yum.id}`}
                   className={({ isActive, isPending }) =>
                     isActive
                       ? "active"
@@ -148,15 +148,15 @@ export default function Home() {
                   }
                 >
                   {
-                      <Link to={`contacts/${contact.id}`}>
-                          {contact.first || contact.last ? (
+                      <Link to={`yums/${yum.id}`}>
+                          {yum.first || yum.last ? (
                               <>
-                                  {contact.first} {contact.last}
+                                  {yum.first} {yum.last}
                               </>
                           ) : (
                               <i>No Name</i>
                           )}{" "}
-                          {contact.favorite && <span>★</span>}
+                          {yum.favorite && <span>★</span>}
                       </Link>
                   }
                 </NavLink>
@@ -166,15 +166,15 @@ export default function Home() {
               </ul>
           ) : (
               <p>
-                  <i>No contacts</i>
+                  <i>No yums</i>
               </p>
           )}
           {/* <ul>
             <li>
-              <Link to={`contacts/1`}>Your Name</Link>
+              <Link to={`yums/1`}>Your Name</Link>
             </li>
             <li>
-              <Link to={`contacts/2`}>Your Friend</Link>
+              <Link to={`yums/2`}>Your Friend</Link>
             </li>
           </ul> */}
         </nav>

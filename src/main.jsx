@@ -4,100 +4,90 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import "./index.css";
 
-import ErrorPage from "./error-page"
+import "./index.css"; // Ensure this file exists in the correct location
 
-import Contact, {
-  loader as contactLoader,
-  action as contactAction,
-} from "./routes/contact"
+import ErrorPage from "./error-page"; // Error handling component
+
+// Importing components and their respective loaders and actions
+import Yum, {
+  loader as yumLoader,
+  action as yumAction,
+} from "./routes/yum";
 
 import EditContact, {
   action as editAction,
 } from "./routes/edit";
 
-// root loader, action
 import Root, { 
   loader as rootLoader,
-  action as rootAction, 
-} from "./routes/home"; 
+  action as rootAction,
+} from "./routes/home";
 
 import { 
-  action as destroyAction 
+  action as destroyAction,
 } from "./routes/destroy";
 
-import Index from "./routes/index";
+import Index from "./routes/index"; // Default landing page
+import Start from "./routes/root"; // Startup or initial page
+import NamePrompt from './routes/name-prompt'; // Page to prompt user for name
+import AddAYum from "./routes/add-a-yum"; // New "Add a Yum!" page
 
-import Start from "./routes/root"
-
-import NamePrompt from './routes/name-prompt';
-
-import { UserProvider, useUser } from './context/UserContext';
-
-import AddAYum from "./routes/add-a-yum";
+import { UserProvider } from './context/UserContext'; // User context provider
 
 const router = createBrowserRouter([
-  
   {
     path: "/home",
-    // element: <div>Hello world!</div>,
-    element: <Root />,
-    errorElement: <ErrorPage />,
+    element: <Root />, // Root component for the main application
+    errorElement: <ErrorPage />, // Error handling
     loader: rootLoader,
     action: rootAction,
     children: [
       {
-        // wrap routes again so errorPage shows up in root outlet
-        errorElement: <ErrorPage />,
+        errorElement: <ErrorPage />, // Error boundary for nested routes
         children: [
-          // index instead of path, loads whenever no parent/outlet
-          // put the "what would you like to do" page here
-          { index: true, element: <Index /> },
-          // contacts
+          { index: true, element: <Index /> }, // Default landing page when no specific path is given
           {
-            path: "contacts/:contactId",
-            element: <Contact />,
-            loader: contactLoader,
-            action: contactAction,
+            path: "yums/:yumId",
+            element: <Yum />,
+            loader: yumLoader,
+            action: yumAction,
           },
-          // editor
           {
-            path: "contacts/:contactId/edit",
+            path: "yums/:yumId/edit",
             element: <EditContact />,
-            loader: contactLoader,
+            loader: yumLoader,
             action: editAction,
           },
           {
-            path: "contacts/:contactId/destroy",
+            path: "yums/:yumId/destroy",
             action: destroyAction,
             errorElement: <div>Oops! There was an error.</div>,
           },
           {
-            path: "/home/add-a-yum",
-            element: <AddAYum />,
+            path: "add-a-yum", // Path for "Add a Yum!"
+            element: <AddAYum />, // Component to add a Yum
           },
         ],
       },
     ],
   },
-  
-  
   {
-    path: "/",
-    element: <Start />,
-    errorElement: <ErrorPage />,
+    path: "/create-user",
+    element: <NamePrompt />,
   },
   {
-    path: "contacts/:contactId",
-    element: <Contact />,
+    path: "/",
+    element: <Start />, // Startup or initial page
+    errorElement: <ErrorPage />, // Error handling
   },
 ]);
 
+// Render the application with UserProvider for user context
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <UserProvider>
-      <RouterProvider router={router} />
-    </UserProvider>
+    <UserProvider> 
+      <RouterProvider router={router} /> 
+    </UserProvider> 
   </React.StrictMode>
 );
