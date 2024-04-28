@@ -44,10 +44,15 @@ export default function Home() {
   const submit = useSubmit();
 
   const [isCalorieTrackerOpen, setCalorieTrackerOpen] = useState(false); // State to toggle Calorie Tracker
-  const [isAddAYumOpen, setAddAYumOpen] = useState(false); // State to toggle Add a Yum
 
   const toggleCalorieTracker = () => setCalorieTrackerOpen((prev) => !prev);
-  const toggleAddAYum = () => setAddAYumOpen((prev) => !prev);
+
+  const handleNewYum = async (event) => {
+    event.preventDefault(); // Prevent default form behavior
+
+    const newYum = await createYum(); // Create a new Yum
+    setYums([newYum, ...yums]); // Add the new Yum to the list
+  };
 
   // loading indicator (search spinner)
   const searching =
@@ -82,26 +87,8 @@ export default function Home() {
                   </ul>
                 )}
               </li>
-
-              {/* Add a Yum! Section */}
-              <li>
-                <NavLink to="#" onClick={toggleAddAYum}>
-                  Add a Yum!
-                </NavLink>
-                {isAddAYumOpen && (
-                  <ul>
-                    <li>
-                      <NavLink to="/home/add-a-yum">
-                        Add New Yum
-                      </NavLink>
-                    </li>
-                  </ul>
-                )}
-              </li>
             </ul>
           </nav>
-
-
 
         <div>
           <Form id="search-form" role="search">

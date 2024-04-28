@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import { getYum, updateYum } from "../yums"; // Correct imports
 import "./style.css"; // Ensure correct CSS path
+import { Rating } from 'react-simple-star-rating';
 
 export async function loader({ params }) {
   const yum = await getYum(params.yumId);
@@ -21,10 +22,11 @@ export async function loader({ params }) {
 
 export default function Yum() {
   const { yum } = useLoaderData();
+  const starRating = yum.rating || 0;
 
   return (
     <div id="yum">
-      <h1>Yum Details</h1>
+      {/* <h1>Yum Details</h1> */}
 
       <div>
         <h2>{yum.yumName || 'No Name'}</h2>
@@ -41,14 +43,43 @@ export default function Yum() {
           <p>No picture available</p>
         )}
 
-        <p>Date: {yum.date || 'Unknown'}</p>
-        <p>Restaurant: {yum.restaurantName || 'N/A'}</p>
-        <p>Rating: {yum.rating || 0}/10</p>
-        <p>Calories: {yum.calorieCount || 0}</p>
-        <p>Notes: {yum.notes || 'No notes available'}</p>
+        <div className="detail-line">
+          <span className="label">Date:</span>
+          <span className="value">{yum.date || 'Unknown'}</span>
+        </div>
+        
+        <div className="detail-line">
+          <span className="label">Restaurant:</span>
+          <span className="value">{yum.restaurantName || 'N/A'}</span>
+        </div>
+        
+        
+        
+        <div className="detail-line">
+          <span className="label">Calories:</span>
+          <span className="value">{yum.calorieCount || 0}</span>
+        </div>
+        
+        <div className="detail-line">
+          <span className="label">Notes:</span>
+          <span className="value">{yum.notes || 'No notes available'}</span>
+        </div>
+
+      <div className="detail-line">
+          <span className="label">Rating:</span>
+          {[...Array(10)].map((_, index) => (
+            <span
+              key={index}
+              className={`star ${index < starRating ? '' : 'unfilled'}`} // Apply style based on rating
+              >
+              ★
+            </span>
+          ))}
+          <span className="value">{yum.rating || 0}/10</span>
+        </div>
       </div>
 
-      <div>
+      <div className="button-container">
         <Form action="edit">
           <button type="submit">Edit</button>
         </Form>

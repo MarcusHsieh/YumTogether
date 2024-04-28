@@ -31,7 +31,6 @@ import {
 import Index from "./routes/index"; // Default landing page
 import Start from "./routes/root"; // Startup or initial page
 import NamePrompt from './routes/name-prompt'; // Page to prompt user for name
-import AddAYum from "./routes/add-a-yum"; // New "Add a Yum!" page
 
 import { UserProvider } from './context/UserContext'; // User context provider
 
@@ -63,12 +62,6 @@ const router = createBrowserRouter([
             path: "yums/:yumId/destroy",
             action: destroyAction,
             errorElement: <div>Oops! There was an error.</div>,
-          },
-          {
-            path: "add-a-yum", // Path for "Add a Yum!"
-            // element: <AddAYum />, // Component to add a Yum
-            element: <EditYum />, 
-            // action: yumEditAction,
           },
         ],
       },
