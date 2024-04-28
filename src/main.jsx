@@ -21,7 +21,7 @@ import EditContact, {
 import Root, { 
   loader as rootLoader,
   action as rootAction, 
-} from "./routes/root"; 
+} from "./routes/home"; 
 
 import { 
   action as destroyAction 
@@ -29,16 +29,18 @@ import {
 
 import Index from "./routes/index";
 
-import StartupScreen from "./routes/startup-screen/start"
+import Start from "./routes/root"
+
+import NamePrompt from './routes/name-prompt';
+
+import { UserProvider, useUser } from './context/UserContext';
+
+import AddAYum from "./routes/add-a-yum";
 
 const router = createBrowserRouter([
+  
   {
-    path: "/",
-    element: <StartupScreen />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/root",
+    path: "/home",
     // element: <div>Hello world!</div>,
     element: <Root />,
     errorElement: <ErrorPage />,
@@ -71,9 +73,20 @@ const router = createBrowserRouter([
             action: destroyAction,
             errorElement: <div>Oops! There was an error.</div>,
           },
+          {
+            path: "/home/add-a-yum",
+            element: <AddAYum />,
+          },
         ],
       },
     ],
+  },
+  
+  
+  {
+    path: "/",
+    element: <Start />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "contacts/:contactId",
@@ -83,6 +96,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>
 );
