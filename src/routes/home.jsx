@@ -18,17 +18,22 @@ import { useEffect, useState } from "react";
 // action
 export async function action() {
   const yum = await createYum();
-  return redirect(`/yums/${yum.id}/edit`);
+  return redirect(`/home/yums/${yum.id}/edit`);
   // return { yum };
 }
+
+// const createNewYum = async () => {
+//   const yum = await createYum();
+//   navigate(`/yums/${yum.id}/edit`); // Navigate to the new Yum's edit page
+// };
 
 // loader
 // filter list with URL search params
 export async function loader({ request }) {
-const url = new URL(request.url);
-const q = url.searchParams.get("q") || "";
-const yums = await getYums(q);
-return { yums, q };
+  const url = new URL(request.url);
+  const q = url.searchParams.get("q") || "";
+  const yums = await getYums(q);
+  return { yums, q };
 }
 
 export default function Home() {
@@ -98,7 +103,6 @@ export default function Home() {
 
 
 
-        <h1>ooga booga</h1>
         <div>
           <Form id="search-form" role="search">
             <input

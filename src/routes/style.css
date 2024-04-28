@@ -190,3 +190,113 @@
   font-size: 1.5rem; /* Slightly smaller text for the question */
   margin: 0; /* No margin */
 }
+
+
+
+/* add-a-yum form page */
+
+.add-a-yum-container {
+  position: relative; /* Allows absolute positioning for the image */
+  padding: 20px;
+}
+
+.add-a-yum-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.add-a-yum-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Adds space between form elements */
+}
+
+.add-a-yum-container form input,
+.add-a-yum-container form textarea {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-a-yum-container form label {
+  font-weight: bold;
+  margin-right: 10px; /* space b/n text prompt and box*/
+}
+
+.add-a-yum-container form button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #71b7cc; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-a-yum-container form button:hover {
+  background-color: #6298a8f5;
+}
+
+.add-a-yum-container img {
+  position: absolute; /* Positioning in the top-right corner */
+  top: 10px;
+  right: 10px;
+  width: 300px; /* Set appropriate size */
+  height: auto; /* Maintain aspect ratio */
+}
+
+
+
+/* edit */
+
+.edit-yum-container {
+  position: relative; /* Allows absolute positioning for the image */
+  padding: 20px;
+}
+
+.edit-yum-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.edit-yum-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Adds space between form elements */
+}
+
+.edit-yum-container form input,
+.edit-yum-container form textarea {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.edit-yum-container form label {
+  font-weight: bold;
+  margin-right: 10px; /* Adds space between the label and input box */
+}
+
+.edit-yum-container form button {
+  padding: 10px 20px; /* Padding for the buttons */
+  font-size: 1rem; /* Font size for the buttons */
+  background-color: #71b7cc; /* Default background color */
+  color: white; /* Text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Cursor changes on hover */
+}
+
+.edit-yum-container form button:hover {
+  background-color: #6298a8f5; /* Change color on hover */
+}
+
+.edit-yum-container img {
+  position: absolute; /* Positioning in the top-right corner */
+  top: 10px;
+  right: 10px;
+  width: 300px; /* Set width */
+  height: auto; /* Maintain aspect ratio */
+}

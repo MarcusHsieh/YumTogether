@@ -15,8 +15,8 @@ import Yum, {
   action as yumAction,
 } from "./routes/yum";
 
-import EditContact, {
-  action as editAction,
+import EditYum, {
+  action as yumEditAction,
 } from "./routes/edit";
 
 import Root, { 
@@ -55,9 +55,9 @@ const router = createBrowserRouter([
           },
           {
             path: "yums/:yumId/edit",
-            element: <EditContact />,
+            element: <EditYum />,
             loader: yumLoader,
-            action: editAction,
+            action: yumEditAction,
           },
           {
             path: "yums/:yumId/destroy",
@@ -66,7 +66,9 @@ const router = createBrowserRouter([
           },
           {
             path: "add-a-yum", // Path for "Add a Yum!"
-            element: <AddAYum />, // Component to add a Yum
+            // element: <AddAYum />, // Component to add a Yum
+            element: <EditYum />, 
+            action: yumEditAction,
           },
         ],
       },
