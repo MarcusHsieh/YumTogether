@@ -1,41 +1,59 @@
 import React, { useState, useEffect } from 'react';
-import { Rating } from 'react-simple-star-rating';
 import { useNavigate, useLoaderData } from 'react-router-dom';
 import { createYum, updateYum } from '../yums';
-import yumCat from '../assets/yumCat-2.png';
+import { Rating } from 'react-simple-star-rating';
 import "./style.css";
-
-export async function action({ request, params }) {
-  const formData = await request.formData();
-  const updates = Object.fromEntries(formData)
-  await updateYum(params.yumId, updates);
-  return redirect(`/home/yums/${params.yumId}`);
-}
+import yumCat from '../assets/yumCat-2.png';
 
 export default function EditYum() {
   const navigate = useNavigate();
-  const loaderData = useLoaderData(); // Load the existing "Yum" data
-  const yum = loaderData?.yum; // Access the data, if available
+  const loaderData = useLoaderData();
+  const yum = loaderData?.yum;
 
-  // State management: if it's editing, use existing data; otherwise, use default values
   const [yumName, setYumName] = useState(yum?.yumName || '');
   const [restaurantName, setRestaurantName] = useState(yum?.restaurantName || '');
   const [calorieCount, setCalorieCount] = useState(yum?.calorieCount || '');
   const [rating, setRating] = useState(yum?.rating || 0);
   const [date, setDate] = useState(yum?.date || '');
   const [notes, setNotes] = useState(yum?.notes || '');
-  const [pictures, setPictures] = useState([]); // File input for pictures
+  const [picture, setPicture] = useState(yum?.picture || ''); // Single picture
 
-  const handleFileChange = (event) => {
-    setPictures(Array.from(event.target.files)); // Store selected files
+  const handleFileChange = async (event) => {
+    try {
+      const file = event.target.files[0]; // Get the first (and only) file
+  
+      if (!file) {
+        throw new Error("No file selected");
+      }
+  
+      const formData = new FormData();
+      formData.append("picture", file); // Append the single file to form data
+  
+      const response = await fetch("http://localhost:3001/upload", {
+        method: "POST",
+        body: formData,
+      });
+  
+      if (!response.ok) {
+        throw new Error("File upload failed");
+      }
+  
+      const data = await response.json(); // Get response data
+      const uploadedFilename = data.file.filename; // Get the uploaded file's name
+  
+      setPicture(uploadedFilename); // Update state with uploaded filename
+    } catch (error) {
+      console.error("Error during file upload:", error);
+    }
   };
+  
 
   const handleRating = (rate) => {
     setRating(rate);
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent default form behavior
+    event.preventDefault();
 
     const yumData = {
       yumName,
@@ -44,24 +62,21 @@ export default function EditYum() {
       rating,
       date,
       notes,
-      pictures,
+      picture, // Store single picture filename
     };
 
     if (yum) {
-      // If editing an existing Yum
-      await updateYum(yum.id, yumData); // Update the existing Yum
-      navigate(`/home/yums/${yum.id}`); // Redirect to the updated Yum's page
+      await updateYum(yum.id, yumData); // Update existing Yum
+      navigate(`/home/yums/${yum.id}`); // Redirect to updated Yum
     } else {
-      // If creating a new Yum
-      const newYum = await createYum(yumData); // Create a new Yum entry
-      navigate(`/home/yums/${newYum.id}`); // Redirect to the new Yum's page
+      const newYum = await createYum(yumData); // Create new Yum
+      navigate(`/home/yums/${newYum.id}`); // Redirect to new Yum
     }
   };
 
   return (
     <div className="edit-yum-container">
       <h1>{yum ? 'Edit Yum' : 'Add a Yum'}</h1>
-
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="yum-name">Yum Name:</label>
@@ -90,7 +105,6 @@ export default function EditYum() {
           <input
             type="number"
             id="calorie-count"
-            placeholder="Enter Calorie Count"
             value={calorieCount}
             onChange={(e) => setCalorieCount(e.target.value)}
           />
@@ -107,23 +121,11 @@ export default function EditYum() {
         </div>
 
         <div>
-          <label htmlFor="pictures">Add Pictures:</label>
+          <label htmlFor="picture">Add Picture:</label>
           <input
             type="file"
-            id="pictures"
-            multiple
+            id="picture"
             onChange={handleFileChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="notes">Notes:</label>
-          <textarea
-            id="notes"
-            placeholder="Enter Additional Notes"
-            rows="4"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
           />
         </div>
 
@@ -135,7 +137,6 @@ export default function EditYum() {
             iconsCount={10}
             size={25}
             transition
-            allowFraction
           />
         </div>
 
@@ -143,12 +144,12 @@ export default function EditYum() {
         
         <button
           type="button"
-          onClick={() => navigate(-1)} // Cancel button navigates back
+          onClick={() => navigate(-1)}
         >
           Cancel
         </button>
       </form>
-      <img src={yumCat} alt="YumCat-2" />
+      <img src={yumCat} alt="yumCat-2" /> {/* Static image */}
     </div>
   );
 }

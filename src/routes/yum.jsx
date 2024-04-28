@@ -4,7 +4,7 @@ import {
   useFetcher,
 } from "react-router-dom";
 import { getYum, updateYum } from "../yums"; // Correct imports
-import "./style.css"; // Make sure this path is correct
+import "./style.css"; // Ensure correct CSS path
 
 export async function loader({ params }) {
   const yum = await getYum(params.yumId);
@@ -19,65 +19,50 @@ export async function loader({ params }) {
   return { yum }; // Load the Yum data
 }
 
-// Action function to handle updating Yums
-export async function action({ request, params }) {
-  const formData = await request.formData();
-  
-  const updates = {
-    yumName: formData.get("yumName"),
-    restaurantName: formData.get("restaurantName"),
-    calorieCount: parseInt(formData.get("calorieCount"), 10), // Ensure integer
-    rating: parseInt(formData.get("rating"), 10), // Ensure integer
-    date: formData.get("date"),
-    notes: formData.get("notes"),
-  };
-  
-  return updateYum(params.yumId, updates); // Update the Yum
-}
-
-// Component to display Yum details
 export default function Yum() {
-  const { yum } = useLoaderData(); // Load data from the loader
-  
+  const { yum } = useLoaderData();
+
   return (
     <div id="yum">
-      <h1>Yum Details</h1> {/* Header */}
+      <h1>Yum Details</h1>
 
       <div>
-        <h2>{yum.yumName || "No Name"}</h2> {/* Yum name */}
-        
-        {yum.pictures && yum.pictures.length > 0 ? ( 
-          <div> {/* Display user-added pictures */}
-            {yum.pictures.map((pic, index) => (
-              <img key={index} src={pic} alt={`Yum ${index + 1}`} onError={() => console.error("Image loading error")} />
-            ))}
+        <h2>{yum.yumName || 'No Name'}</h2>
+
+        {yum.picture ? (
+          <div>
+            <img
+              src={`http://localhost:3001/uploads/${yum.picture}`} // Correct path to image
+              alt={`Yum Picture`}
+              onError={() => console.error('Error loading image')}
+            />
           </div>
         ) : (
-          <p>No pictures available</p> // Fallback if no pictures
+          <p>No picture available</p>
         )}
 
-        <p>Date: {yum.date || "Unknown"}</p> {/* Date */}
-        <p>Restaurant: {yum.restaurantName || "N/A"}</p> {/* Restaurant name */}
-        <p>Rating: {yum.rating || 0}/10</p> {/* Rating out of 10 */}
-        <p>Calories: {yum.calorieCount || 0}</p> {/* Calorie count */}
-        <p>Notes: {yum.notes || "No notes"} </p> {/* Notes */}
+        <p>Date: {yum.date || 'Unknown'}</p>
+        <p>Restaurant: {yum.restaurantName || 'N/A'}</p>
+        <p>Rating: {yum.rating || 0}/10</p>
+        <p>Calories: {yum.calorieCount || 0}</p>
+        <p>Notes: {yum.notes || 'No notes available'}</p>
       </div>
 
       <div>
-        <Form action="edit"> {/* Edit action */}
-          <button type="submit">Edit</button> {/* Button to edit */}
+        <Form action="edit">
+          <button type="submit">Edit</button>
         </Form>
-        
+
         <Form
           method="post"
           action="destroy"
           onSubmit={(event) => {
-            if (!confirm("Are you sure you want to delete this Yum?")) {
-              event.preventDefault(); // Prevent delete if not confirmed
+            if (!confirm('Are you sure you want to delete this Yum?')) {
+              event.preventDefault(); 
             }
           }}
         >
-          <button type="submit">Delete</button> {/* Button to delete */}
+          <button type="submit">Delete</button>
         </Form>
       </div>
     </div>

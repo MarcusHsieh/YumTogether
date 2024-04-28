@@ -12,11 +12,11 @@ import ErrorPage from "./error-page"; // Error handling component
 // Importing components and their respective loaders and actions
 import Yum, {
   loader as yumLoader,
-  action as yumAction,
+  // action as yumAction,
 } from "./routes/yum";
 
 import EditYum, {
-  action as yumEditAction,
+  // action as yumEditAction,
 } from "./routes/edit";
 
 import Root, { 
@@ -51,13 +51,13 @@ const router = createBrowserRouter([
             path: "yums/:yumId",
             element: <Yum />,
             loader: yumLoader,
-            action: yumAction,
+            // action: yumAction,
           },
           {
             path: "yums/:yumId/edit",
             element: <EditYum />,
             loader: yumLoader,
-            action: yumEditAction,
+            // action: yumEditAction,
           },
           {
             path: "yums/:yumId/destroy",
@@ -68,7 +68,7 @@ const router = createBrowserRouter([
             path: "add-a-yum", // Path for "Add a Yum!"
             // element: <AddAYum />, // Component to add a Yum
             element: <EditYum />, 
-            action: yumEditAction,
+            // action: yumEditAction,
           },
         ],
       },
