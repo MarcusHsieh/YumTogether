@@ -11,21 +11,18 @@ import {
   redirect,
   useNavigation,
   useSubmit,
+  useLocation,
 } from "react-router-dom";
 import { getYums, createYum } from "../yums";
 import { useEffect, useState } from "react";
+import "../index.css";
 
 // action
 export async function action() {
   const yum = await createYum();
   return redirect(`/home/yums/${yum.id}/edit`);
-  // return { yum };
 }
 
-// const createNewYum = async () => {
-//   const yum = await createYum();
-//   navigate(`/yums/${yum.id}/edit`); // Navigate to the new Yum's edit page
-// };
 
 // loader
 // filter list with URL search params
@@ -47,11 +44,13 @@ export default function Home() {
 
   const toggleCalorieTracker = () => setCalorieTrackerOpen((prev) => !prev);
 
+  // new yum handler
   const handleNewYum = async (event) => {
-    event.preventDefault(); // Prevent default form behavior
+    // event.preventDefault(); // Prevent default form behavior
 
-    const newYum = await createYum(); // Create a new Yum
-    setYums([newYum, ...yums]); // Add the new Yum to the list
+    // const newYum = await createYum(); // Create a new Yum
+    // setYums((yumVal) => [newYum, ...yumVal]); // Add the new Yum to the list
+    // updateSidebar();
   };
 
   // loading indicator (search spinner)
@@ -69,28 +68,10 @@ export default function Home() {
   return (
     <>
       <div id="sidebar">
-        <h1>YumTogether</h1> {/* Update header */}
-          <nav>
-            <ul>
-              {/* Calorie Tracker Section */}
-              <li>
-                <NavLink to="#" onClick={toggleCalorieTracker}>
-                  Calorie Tracker
-                </NavLink>
-                {isCalorieTrackerOpen && (
-                  <ul>
-                    <li>
-                      <NavLink to="/home/calorie-tracker">
-                        View Tracker
-                      </NavLink>
-                    </li>
-                  </ul>
-                )}
-              </li>
-            </ul>
-          </nav>
 
+        <h2 className="heading">Yum History</h2>
         <div>
+          
           <Form id="search-form" role="search">
             <input
               id="q"
@@ -118,57 +99,69 @@ export default function Home() {
               aria-live="polite"
             ></div>
           </Form>
-          <Form method="post">
+          <Form method="post" onSubmit={handleNewYum}>
             <button type="submit">New</button>
           </Form>
         </div>
         <nav>
-          {/* access + render data */}
+          {/* {Navigation list for Yums} */}
           {yums.length ? (
               <ul>
               {yums.map((yum) => (
-                  <li key={yum.id}>
-                      <NavLink
-                  to={`yums/${yum.id}`}
-                  className={({ isActive, isPending }) =>
-                    isActive
-                      ? "active"
-                      : isPending
-                      ? "pending"
-                      : ""
-                  }
-                >
-                  {
+                <li key={yum.id}>
+                  <NavLink
+                    to={`yums/${yum.id}`} // Navigation link to the Yum's detail page
+                    className={({ isActive, isPending }) =>
+                      isActive ? "active" : isPending ? "pending" : ""
+                    }
+                  >
+                    {
+                      // Check if there's a first or last name, otherwise show "No Name"
                       <Link to={`yums/${yum.id}`}>
-                          {yum.first || yum.last ? (
-                              <>
-                                  {yum.first} {yum.last}
-                              </>
-                          ) : (
-                              <i>No Name</i>
-                          )}{" "}
-                          {yum.favorite && <span>★</span>}
+                        {yum.yumName ? (
+                          <>
+                            {yum.yumName} 
+                          </>
+                        ) : (
+                          <i>No Name</i> // Display when there's no name
+                        )} {" "}
+                        {yum.favorite && <span>★</span>} 
                       </Link>
-                  }
-                </NavLink>
-                      
-                  </li>
+                    }
+                  </NavLink>
+                </li>
               ))}
-              </ul>
+            </ul>
+            
           ) : (
               <p>
                   <i>No yums</i>
               </p>
           )}
-          {/* <ul>
-            <li>
-              <Link to={`yums/1`}>Your Name</Link>
-            </li>
-            <li>
-              <Link to={`yums/2`}>Your Friend</Link>
-            </li>
-          </ul> */}
         </nav>
+
+        {/* Calorie Tracker Section */}
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <NavLink to="#" onClick={toggleCalorieTracker}>
+                  Calorie Tracker
+                </NavLink>
+                {isCalorieTrackerOpen && (
+                  <ul>
+                    <li>
+                      <NavLink to="/home/calorie-tracker">
+                        Update your DCI
+                      </NavLink>
+                    </li>
+                  </ul>
+                )}
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <h1>YumTogether</h1> 
       </div>
 
       {/* everything here is Outlet, right side */}

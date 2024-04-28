@@ -47,6 +47,7 @@ export default function EditYum() {
     }
   };
   
+  
 
   const handleRating = (rate) => {
     setRating(rate);
@@ -65,13 +66,16 @@ export default function EditYum() {
       picture, // Store single picture filename
     };
 
+    let newYum;
+
     if (yum) {
       await updateYum(yum.id, yumData); // Update existing Yum
-      navigate(`/home/yums/${yum.id}`); // Redirect to updated Yum
+      newYum = yum; // Keep reference to updated Yum
     } else {
-      const newYum = await createYum(yumData); // Create new Yum
-      navigate(`/home/yums/${newYum.id}`); // Redirect to new Yum
+      newYum = await createYum(yumData); // Create new Yum
     }
+
+    navigate(`/home/yums/${newYum.id}`);
   };
 
   return (

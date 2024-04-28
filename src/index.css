@@ -140,6 +140,14 @@ form[action$="destroy"] button {
   top: -16px;
 }
 
+#sidebar .heading {
+  color: #333; /* Set the text color */
+  font-size: 1.5em; /* Set the font size */
+  font-weight: bold; /* Set the font weight */
+  margin-bottom: 0px; /* Add space below the heading */
+  text-align: center; /* Align the text to the left (or adjust as needed) */
+}
+
 #sidebar > div {
   display: flex;
   align-items: center;

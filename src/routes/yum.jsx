@@ -77,7 +77,7 @@ export default function Yum() {
           ))}
           <span className="value">{yum.rating || 0}/10</span>
         </div>
-      </div>
+        </div>
 
       <div className="button-container">
         <Form action="edit">
