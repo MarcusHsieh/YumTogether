@@ -60,10 +60,6 @@ export default function Yum() {
           <span className="value">{yum.calorieCount || 0}</span>
         </div>
         
-        <div className="detail-line">
-          <span className="label">Notes:</span>
-          <span className="value">{yum.notes || 'No notes available'}</span>
-        </div>
 
       <div className="detail-line">
           <span className="label">Rating:</span>
