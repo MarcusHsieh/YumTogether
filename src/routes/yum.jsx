@@ -3,8 +3,8 @@ import {
   useLoaderData,
   useFetcher,
 } from "react-router-dom";
-import { getYum, updateYum } from "../yums"; // Correct imports
-import "./style.css"; // Ensure correct CSS path
+import { getYum, updateYum } from "../yums"; 
+import "./style.css"; 
 import { Rating } from 'react-simple-star-rating';
 
 export async function loader({ params }) {
@@ -17,7 +17,7 @@ export async function loader({ params }) {
     });
   }
   
-  return { yum }; // Load the Yum data
+  return { yum }; 
 }
 
 export default function Yum() {
@@ -34,7 +34,7 @@ export default function Yum() {
         {yum.picture ? (
           <div>
             <img
-              src={`http://localhost:3001/uploads/${yum.picture}`} // Correct path to image
+              src={`http://localhost:3001/uploads/${yum.picture}`} 
               alt={`Yum Picture`}
               onError={() => console.error('Error loading image')}
             />
@@ -70,7 +70,7 @@ export default function Yum() {
           {[...Array(10)].map((_, index) => (
             <span
               key={index}
-              className={`star ${index < starRating ? '' : 'unfilled'}`} // Apply style based on rating
+              className={`star ${index < starRating ? '' : 'unfilled'}`} 
               >
               ★
             </span>
@@ -100,7 +100,7 @@ export default function Yum() {
   );
 }
 
-// Favorite function to mark Yums as favorite
+// fav function
 function Favorite({ yum }) {
   const fetcher = useFetcher(); 
   let favorite = yum.favorite;
@@ -112,7 +112,7 @@ function Favorite({ yum }) {
         value={favorite ? "false" : "true"}
         aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
       >
-        {favorite ? "★" : "☆"} {/* Toggle between favorite and not */}
+        {favorite ? "★" : "☆"} 
       </button>
     </fetcher.Form>
   );

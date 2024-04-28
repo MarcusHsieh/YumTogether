@@ -16,18 +16,18 @@
     flex-direction: column;
     justify-content: center;
     display: inline-flex;
-    align-items: center; /* Ensure all content is centered */
+    align-items: center; 
     background-color: #83bed073;
-    height: 100%; /* Ensures it occupies full height */
-    width: 100%; /* Ensures it occupies full width */
+    height: 100%; 
+    width: 100%; 
   }
   
   .startup-screen .overlap-group {
-    position: relative; /* Retains position relative to its parent */
+    position: relative; 
     display: flex;
     flex-direction: column;
     display: inline-flex;
-    justify-content: center; /* Center elements within the overlap-group */
+    justify-content: center; 
     align-items: center;
   }
   
@@ -96,7 +96,7 @@
   }
   
   .startup-screen .button:hover {
-    animation: pulse .5s 1; /* Apply pulse animation on hover */
+    animation: pulse .5s 1;
   }
   
   .startup-screen .div {
@@ -119,7 +119,7 @@
   /* name prompt */
 
   .name-prompt-container {
-    position: relative; /* Create a stacking context for the pseudo-element */
+    position: relative; 
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -130,14 +130,14 @@
   
   .name-prompt-container::before {
     content: "";
-    position: absolute; /* Positioning the pseudo-element absolutely */
+    position: absolute; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #58818d73; /* Same background color as container */
-    filter: blur(10px); /* Apply a 10px blur */
-    z-index: -1; /* Keep it behind the content */
+    background-color: #58818d73; 
+    filter: blur(10px); 
+    z-index: -1; 
   }
   
   .name-prompt-container input {
@@ -145,8 +145,8 @@
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin-bottom: 20px; /* Adjusted margin to separate elements */
-    background: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+    margin-bottom: 20px; 
+    background: rgba(255, 255, 255, 0.7); 
   }
   
   .name-prompt-container button {
@@ -171,24 +171,24 @@
 /* index */
 .index-container {
   
-  position: relative; /* Create a stacking context for the pseudo-element */
+  position: relative; 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100%;
-  text-align: center; /* Center text */
+  text-align: center; 
 }
 
 .index-container h1 {
-  font-size: 2rem; /* Large text for greeting */
-  margin: 0; /* No margin */
+  font-size: 2rem; 
+  margin: 0; 
 }
 
 .index-container p {
-  font-size: 1.5rem; /* Slightly smaller text for the question */
-  margin: 0; /* No margin */
+  font-size: 1.5rem; 
+  margin: 0;
 }
 
 
@@ -197,7 +197,7 @@
 /* edit */
 
 .edit-yum-container {
-  position: relative; /* Allows absolute positioning for the image */
+  position: relative; 
   padding: 20px;
 }
 
@@ -209,7 +209,7 @@
 .edit-yum-container form {
   display: flex;
   flex-direction: column;
-  gap: 30px; /* Adds space between form elements */
+  gap: 30px; 
 }
 
 .edit-yum-container form input,
@@ -222,148 +222,141 @@
 
 .edit-yum-container form label {
   font-weight: bold;
-  margin-right: 10px; /* Adds space between the label and input box */
+  margin-right: 10px; 
 }
 
 .edit-yum-container form button {
-  padding: 10px 20px; /* Padding for the buttons */
-  font-size: 1rem; /* Font size for the buttons */
-  background-color: #71b7cc; /* Default background color */
-  color: white; /* Text color */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Cursor changes on hover */
+  padding: 10px 20px; 
+  font-size: 1rem; 
+  background-color: #71b7cc; 
+  color: white; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer; 
 }
 
 .edit-yum-container form button:hover {
-  background-color: #6298a8f5; /* Change color on hover */
+  background-color: #6298a8f5; 
 }
 
 .edit-yum-container img {
-  position: absolute; /* Positioning in the top-right corner */
+  position: absolute; 
   top: 10px;
   right: 10px;
-  width: 300px; /* Set width */
-  height: auto; /* Maintain aspect ratio */
+  width: 300px; 
+  height: auto; 
 }
 
 
 
 /* yum.jsx */
-
-/* Container for the Yum component */
 #yum {
-  padding: 40px; /* Adds some space around the component */
-  background-color: #f9f9f9; /* Light background color */
-  border: 1px solid #ddd; /* Light border for visual separation */
-  border-radius: 30px; /* Rounded corners */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
-  text-align: center; /* Align text to the center */
+  padding: 40px; 
+  background-color: #f9f9f9;
+  border: 1px solid #ddd; 
+  border-radius: 30px; 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+  text-align: center; 
 }
 
-/* Header styles */
+
 #yum h1 {
-  font-size: 2rem; /* Larger font size for the main header */
-  color: #333; /* Darker color for contrast */
-  margin-bottom: 20px; /* Space below the header */
-  text-align: center; /* Ensure header is centered */
+  font-size: 2rem; 
+  color: #333; 
+  margin-bottom: 20px;
+  text-align: center; 
 }
 
-/* Subheader styles */
 #yum h2 {
   margin-top: -10px;
-  font-size: 1.70rem; /* Subheader font size */
-  color: #555; /* Slightly lighter color */
-  text-align: center; /* Ensure subheader is centered */
+  font-size: 1.70rem;
+  color: #555; 
+  text-align: center; 
 }
 
-/* Styling for the image container */
+
 #yum div img {
-  max-width: 50%; /* Ensure image doesn't exceed container width */
-  height: auto; /* Maintain aspect ratio */
-  border: 2px solid #ddd; /* Light border around the image */
-  border-radius: 10px; /* Rounded corners */
-  margin: 10px auto; /* Center image and add space above and below */
-  transition: all 0.3s; /* Smooth transition for hover effects */
+  max-width: 50%; 
+  height: auto; 
+  border: 2px solid #ddd; 
+  border-radius: 10px; 
+  margin: 10px auto; 
+  transition: all 0.3s;
 }
 
-/* Hover effect on images */
 #yum div img:hover {
-  border-color: #71b7cc; /* Change border color on hover */
-  transform: scale(1.05); /* Slight zoom on hover */
+  border-color: #71b7cc;
+  transform: scale(1.05); 
 }
 
-/* Style for paragraphs and text within the component */
+
 #yum p {
-  
-  font-size: 1rem; /* Standard font size */
-  color: #666; /* Light gray color for body text */
-  margin: 10px 0; /* Vertical spacing between elements */
-  text-align: center; /* Ensure text is centered */
+  font-size: 1rem; 
+  color: #666; 
+  margin: 10px 0;
+  text-align: center; 
 }
 
-/* Container for buttons with flex layout */
+
 #yum .button-container {
-  display: flex; /* Use flexbox to align buttons */
-  justify-content: center; /* Center the buttons */
-  gap: 10px; /* Space between the buttons */
+  display: flex;
+  justify-content: center; 
+  gap: 10px; 
 }
 
-/* Styling for the form and its buttons */
+
 #yum button {
-  background-color: #71b7cc; /* Blue background for buttons */
-  color: white; /* White text on buttons */
-  padding: 10px 20px; /* Padding for the buttons */
+  background-color: #71b7cc; 
+  color: white; 
+  padding: 10px 20px; 
   margin-top: 10px;
-  font-size: 1rem; /* Standard font size for buttons */
-  border: none; /* No border */
-  border-radius: 5px; /* Rounded corners */
-  cursor: pointer; /* Change cursor on hover */
-  transition: background-color 0.3s; /* Smooth transition on hover */
+  font-size: 1rem; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer;
+  transition: background-color 0.3s; 
 }
 
-/* Hover effect on buttons */
 #yum button:hover {
-  background-color: #6298a8; /* Darken background on hover */
+  background-color: #6298a8; 
 }
 
 #yum .detail-line {
-  display: flex; /* Use flexbox for layout */
-  justify-content: space-between; /* Place label on the left and value on the right */
-  padding: 10px 0; /* Padding for visual separation */
-  border-bottom: 1px solid #ddd; /* Border to separate detail lines */
+  display: flex; 
+  justify-content: space-between; 
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd; 
 }
 
 #yum .detail-line:last-child {
-  border-bottom: none; /* Remove border for the last detail line */
+  border-bottom: none; 
 }
 
-/* Style for the label */
+
 #yum .label {
-  font-weight: bold; /* Bold font for emphasis */
-  color: #555; /* Slightly darker color for the label */
+  font-weight: bold; 
+  color: #555;
 }
 
-/* Style for the value */
+
 #yum .value {
-  color: #333; /* Darker color for values */
-  text-align: right; /* Right-align the value */
+  color: #333;
+  text-align: right; 
 }
 
-/* General styling for the rating component */
+
 .star-rating {
-  display: flex; /* Flex layout for stars */
-  align-items: center; /* Center align stars vertically */
+  display: flex; 
+  align-items: center; 
 }
 
-/* Style for each star in the rating component */
 .star {
-  font-size: 1.5rem; /* Size of the stars */
-  color: #ffac33; /* Color for filled stars (golden) */
-  cursor: pointer; /* Cursor changes to pointer on hover */
+  font-size: 1.5rem; 
+  color: #ffac33; 
+  cursor: pointer; 
 }
 
-/* Style for unfilled stars */
+
 .unfilled {
-  color: #ccc; /* Gray color for unfilled stars */
+  color: #ccc; 
 }

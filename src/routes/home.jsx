@@ -40,7 +40,7 @@ export default function Home() {
   const navigation = useNavigation();
   const submit = useSubmit();
 
-  const [isCalorieTrackerOpen, setCalorieTrackerOpen] = useState(false); // State to toggle Calorie Tracker
+  const [isCalorieTrackerOpen, setCalorieTrackerOpen] = useState(false); 
 
   const toggleCalorieTracker = () => setCalorieTrackerOpen((prev) => !prev);
 
@@ -104,26 +104,26 @@ export default function Home() {
           </Form>
         </div>
         <nav>
-          {/* {Navigation list for Yums} */}
+          {/* {navigation list for Yums} */}
           {yums.length ? (
               <ul>
               {yums.map((yum) => (
                 <li key={yum.id}>
                   <NavLink
-                    to={`yums/${yum.id}`} // Navigation link to the Yum's detail page
+                    to={`yums/${yum.id}`} 
                     className={({ isActive, isPending }) =>
                       isActive ? "active" : isPending ? "pending" : ""
                     }
                   >
                     {
-                      // Check if there's a first or last name, otherwise show "No Name"
+                      // checker if has name
                       <Link to={`yums/${yum.id}`}>
                         {yum.yumName ? (
                           <>
                             {yum.yumName} 
                           </>
                         ) : (
-                          <i>No Name</i> // Display when there's no name
+                          <i>No Name</i> // when no name, default
                         )} {" "}
                         {yum.favorite && <span>★</span>} 
                       </Link>
@@ -145,13 +145,13 @@ export default function Home() {
           <nav>
             <ul>
               <li>
-                <NavLink to="#" onClick={toggleCalorieTracker}>
+                <NavLink to="/home/cal-tracker" onClick={toggleCalorieTracker}>
                   Calorie Tracker
                 </NavLink>
                 {isCalorieTrackerOpen && (
                   <ul>
                     <li>
-                      <NavLink to="/home/calorie-tracker">
+                      <NavLink to="/home/dci-calc">
                         Update your DCI
                       </NavLink>
                     </li>

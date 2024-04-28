@@ -16,18 +16,18 @@ export default function EditYum() {
   const [rating, setRating] = useState(yum?.rating || 0);
   const [date, setDate] = useState(yum?.date || '');
   const [notes, setNotes] = useState(yum?.notes || '');
-  const [picture, setPicture] = useState(yum?.picture || ''); // Single picture
+  const [picture, setPicture] = useState(yum?.picture || ''); 
 
   const handleFileChange = async (event) => {
     try {
-      const file = event.target.files[0]; // Get the first (and only) file
+      const file = event.target.files[0]; 
   
       if (!file) {
         throw new Error("No file selected");
       }
   
       const formData = new FormData();
-      formData.append("picture", file); // Append the single file to form data
+      formData.append("picture", file); 
   
       const response = await fetch("http://localhost:3001/upload", {
         method: "POST",
@@ -38,10 +38,10 @@ export default function EditYum() {
         throw new Error("File upload failed");
       }
   
-      const data = await response.json(); // Get response data
-      const uploadedFilename = data.file.filename; // Get the uploaded file's name
+      const data = await response.json(); 
+      const uploadedFilename = data.file.filename; 
   
-      setPicture(uploadedFilename); // Update state with uploaded filename
+      setPicture(uploadedFilename); 
     } catch (error) {
       console.error("Error during file upload:", error);
     }
@@ -63,16 +63,16 @@ export default function EditYum() {
       rating,
       date,
       notes,
-      picture, // Store single picture filename
+      picture, 
     };
 
     let newYum;
 
     if (yum) {
-      await updateYum(yum.id, yumData); // Update existing Yum
-      newYum = yum; // Keep reference to updated Yum
+      await updateYum(yum.id, yumData); 
+      newYum = yum; 
     } else {
-      newYum = await createYum(yumData); // Create new Yum
+      newYum = await createYum(yumData);
     }
 
     navigate(`/home/yums/${newYum.id}`);
@@ -153,7 +153,7 @@ export default function EditYum() {
           Cancel
         </button>
       </form>
-      <img src={yumCat} alt="yumCat-2" /> {/* Static image */}
+      <img src={yumCat} alt="yumCat-2" /> 
     </div>
   );
 }

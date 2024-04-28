@@ -1,0 +1,149 @@
+/* calc */
+
+.dci-calc {
+  padding: 20px; 
+  background-color: #f9f9f9; 
+  border: 1px solid #ddd; 
+  border-radius: 20px; 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+  text-align: center; 
+  }
+  
+  .dci-calc h2 {
+    font-size: 1.5em;
+  }
+  
+  .dci-calc input {
+    padding: 10px;
+    font-size: 1em;
+  }
+  
+  .dci-calc select {
+    padding: 10px;
+    font-size: 1em;
+  }
+  
+  .dci-calc button {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin-top: 20px;
+  }
+  
+  .dci-calc input[type="range"] {
+    width: 100%;
+  }
+  
+
+
+/* results */
+  
+  .dci-result {
+    padding: 20px; 
+    background-color: #f9f9f9; 
+    border: 1px solid #ddd; 
+    border-radius: 20px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    text-align: center; 
+  }
+  
+  .dci-result img {
+    max-width: 70%; 
+    height: auto; 
+    margin: 20px auto; 
+    transition: all 0.3s; 
+  }
+
+  .dci-result img:hover {
+    transform: scale(1.05); 
+  }
+  
+  .dci-result h1 {
+    font-size: 2rem; 
+    color: #333; 
+    margin-bottom: 20px; 
+  }
+  
+  .dci-result h2 {
+    margin-top: -10px;
+    font-size: 2rem; 
+    color: #555;
+
+  }
+  
+
+
+
+
+
+  /* calorie-tracker */
+
+
+
+
+.calorie-tracker-container {
+  padding: 20px; 
+  background-color: #f9f9f9; 
+  border: 1px solid #ddd; 
+  border-radius: 20px; 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+
+.calorie-tracker-container h1 {
+  font-size: 2rem; 
+  color: #333; 
+  margin-bottom: 20px; 
+}
+
+.calorie-tracker-container h2 {
+  margin-top: -10px;
+  font-size: 1.70rem; 
+  color: #555; 
+}
+
+
+.calorie-tracker-container img {
+  max-width: 40%;
+  height: auto; 
+  margin: 20px auto; 
+  transition: all 0.3s; 
+}
+
+.calorie-tracker-container img:hover {
+  transform: scale(1.05); 
+}
+
+
+.calorie-tracker-container p {
+  font-size: 1rem; 
+  color: #666;
+  margin: 10px 0; 
+}
+
+
+.calorie-tracker-container .button-container {
+  display: flex; 
+  justify-content: center; 
+  gap: 10px; 
+}
+
+.calorie-tracker-container button {
+  background-color: #71b7cc; 
+  color: white; 
+  padding: 10px 20px; 
+  margin-top: 10px;
+  font-size: 1rem; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  transition: background-color 0.3s; 
+}
+
+.calorie-tracker-container button:hover {
+  background-color: #6298a8; 
+}
+
+
+
+

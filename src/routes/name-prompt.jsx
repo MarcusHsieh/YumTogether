@@ -4,14 +4,14 @@ import { useUser } from '../context/UserContext';
 
 export default function NamePrompt() {
   const [inputName, setInputName] = useState('');
-  const { setUserName } = useUser(); // Get the setUserName function
+  const { setUserName } = useUser(); 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputName.trim()) {
-      setUserName(inputName); // This updates the context and triggers local storage update
-      navigate('/home'); // Navigate to the home route
+      setUserName(inputName); 
+      navigate('/home'); 
     }
   };
 

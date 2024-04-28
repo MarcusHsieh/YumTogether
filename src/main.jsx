@@ -5,11 +5,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import "./index.css"; // Ensure this file exists in the correct location
+import "./index.css"; 
 
-import ErrorPage from "./error-page"; // Error handling component
+import ErrorPage from "./error-page"; 
 
-// Importing components and their respective loaders and actions
 import Yum, {
   loader as yumLoader,
   // action as yumAction,
@@ -28,24 +27,30 @@ import {
   action as destroyAction,
 } from "./routes/destroy";
 
-import Index from "./routes/index"; // Default landing page
-import Start from "./routes/root"; // Startup or initial page
-import NamePrompt from './routes/name-prompt'; // Page to prompt user for name
+import CalorieTracker from "./routes/calorie-tracker";
+import DciCalc from "./routes/dci-calc";
+import DciResult from "./routes/dci-result";
 
-import { UserProvider } from './context/UserContext'; // User context provider
+import Index from "./routes/index"; 
+import Start from "./routes/root"; // startup page
+import NamePrompt from './routes/name-prompt'; 
+
+import { UserProvider } from './context/UserContext'; 
+import { YumsProvider } from "./context/YumsContext";
+import { DCIProvider } from "./context/DCIContext";
 
 const router = createBrowserRouter([
   {
     path: "/home",
-    element: <Root />, // Root component for the main application
-    errorElement: <ErrorPage />, // Error handling
+    element: <Root />, 
+    errorElement: <ErrorPage />, 
     loader: rootLoader,
     action: rootAction,
     children: [
       {
-        errorElement: <ErrorPage />, // Error boundary for nested routes
+        errorElement: <ErrorPage />, 
         children: [
-          { index: true, element: <Index /> }, // Default landing page when no specific path is given
+          { index: true, element: <Index /> }, 
           {
             path: "yums/:yumId",
             element: <Yum />,
@@ -63,26 +68,43 @@ const router = createBrowserRouter([
             action: destroyAction,
             errorElement: <div>Oops! There was an error.</div>,
           },
+          {
+            path: "dci-calc",
+            element: <DciCalc />,
+          },
+          {
+            path: "dci-result",
+            element: <DciResult />,
+          },
+          {
+            path: "cal-tracker",
+            element: <CalorieTracker />,
+          },
         ],
       },
     ],
   },
+  
   {
     path: "/create-user",
     element: <NamePrompt />,
   },
   {
     path: "/",
-    element: <Start />, // Startup or initial page
-    errorElement: <ErrorPage />, // Error handling
+    element: <Start />, 
+    errorElement: <ErrorPage />, 
   },
 ]);
 
-// Render the application with UserProvider for user context
+// render application with contexts
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <UserProvider> 
-      <RouterProvider router={router} /> 
+      <YumsProvider>
+        <DCIProvider>
+          <RouterProvider router={router} /> 
+        </DCIProvider>
+      </YumsProvider>
     </UserProvider> 
   </React.StrictMode>
 );

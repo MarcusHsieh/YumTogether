@@ -1,14 +1,14 @@
 // startup screen
 
 import React from "react";
-import { useNavigate } from "react-router-dom"; // Use useNavigate for navigation
+import { useNavigate } from "react-router-dom"; 
 import "./style.css";
 
 export default function StartupScreen() {
-  const navigate = useNavigate(); // Get navigate function
+  const navigate = useNavigate(); 
   
   return (
-    <div className="startup-screen">  {/* Relative position ensures correct absolute positioning for children */}
+    <div className="startup-screen">  
       <div className="overlap-group-wrapper">
         <div className="overlap-group">
           <img className="yumcat" alt="Yumcat" src="https://c.animaapp.com/zOWCZenY/img/yumcat-1-1@2x.png" />
